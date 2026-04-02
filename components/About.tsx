@@ -17,6 +17,7 @@ export default function About() {
           <div style={{
             width:"100%",aspectRatio:"3/4",borderRadius:"4px",overflow:"hidden",
             background:"var(--cream3)",border:"1px solid var(--border2)",
+            maxHeight:"60vw",
           }}>
             <img
               src="/Affan.jpeg"
