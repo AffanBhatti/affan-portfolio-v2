@@ -25,7 +25,7 @@ export default function About() {
             <img
               src="/Affan.jpeg"
               alt="Affan Bhatti"
-              style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 40%",display:"block" }}
+              style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 35%",display:"block" }}
             />
           </div>
 
@@ -39,7 +39,7 @@ export default function About() {
           </div>
         </div>
 
-        <div>
+        <div style={{ paddingTop: isMobile ? "0" : "72px" }}>
           <p style={{ fontFamily:"var(--sans)",fontSize:"1.15rem",fontWeight:300,lineHeight:1.8,color:"var(--ink2)",marginBottom:"28px",letterSpacing:"-0.01em" }}>
             I&apos;m a Software Developer and AI Engineer pursuing an Honours BSc in <strong style={{ fontWeight:600 }}>Computer Science & Economics</strong> at the University of Toronto, with a research focus in Astronomy.
           </p>
