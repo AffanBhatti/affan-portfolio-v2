@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const jobs = [
   {
@@ -26,55 +27,54 @@ const jobs = [
 
 export default function Experience() {
   const [active, setActive] = useState(0);
+  const isMobile = useIsMobile();
   const j = jobs[active];
 
   return (
     <section id="experience" style={{ background:"var(--cream2)",borderTop:"1px solid var(--border)",borderBottom:"1px solid var(--border)" }}>
-      <div style={{ maxWidth:"1320px",margin:"0 auto",padding:"120px 48px" }}>
-        <div style={{ display:"grid",gridTemplateColumns:"1fr 2fr",gap:"80px",alignItems:"start" }}>
-          <div>
-            <div className="num" style={{ marginBottom:"12px" }}>02</div>
-            <h2 style={{ fontFamily:"var(--serif)",fontSize:"clamp(2.2rem,3.5vw,3rem)",fontWeight:700,lineHeight:1.1,letterSpacing:"-0.02em",color:"var(--ink)",marginBottom:"48px" }}>
-              Work<br /><em>Experience</em>
-            </h2>
+      <div style={{ maxWidth:"1320px",margin:"0 auto",padding: isMobile ? "80px 24px" : "120px 48px" }}>
+        <div className="num" style={{ marginBottom:"12px" }}>02</div>
+        <h2 style={{ fontFamily:"var(--serif)",fontSize:"clamp(2.2rem,3.5vw,3rem)",fontWeight:700,lineHeight:1.1,letterSpacing:"-0.02em",color:"var(--ink)",marginBottom:"40px" }}>
+          Work<br /><em>Experience</em>
+        </h2>
 
-            {/* Tab list */}
-            <div style={{ display:"flex",flexDirection:"column",gap:"2px" }}>
-              {jobs.map((j,i)=>(
-                <button key={i} onClick={()=>setActive(i)} style={{
-                  cursor:"none",textAlign:"left" as const,border:"none",
-                  padding:"14px 16px",borderRadius:"3px",transition:"all 0.2s",
-                  background: active===i ? "var(--ink)":"transparent",
-                  borderLeft: `3px solid ${active===i?"var(--ink)":"transparent"}`,
-                }}>
-                  <div style={{ fontFamily:"var(--sans)",fontSize:"0.88rem",fontWeight:600,color:active===i?"var(--cream)":"var(--ink2)",marginBottom:"2px" }}>{j.co}</div>
-                  <div style={{ fontFamily:"var(--mono)",fontSize:"0.6rem",letterSpacing:"0.08em",color:active===i?"rgba(245,240,232,0.6)":"var(--ink4)" }}>{j.tag} · {j.period.split("–")[0].trim()}</div>
-                </button>
-              ))}
+        {/* Tab list — horizontal scroll on mobile */}
+        <div style={{ display:"flex", flexDirection: isMobile ? "row" : "column", gap:"8px", overflowX: isMobile ? "auto" : "visible", paddingBottom: isMobile ? "16px" : "0", marginBottom: isMobile ? "24px" : "0", flexShrink: 0 }}>
+          {jobs.map((j,i)=>(
+            <button key={i} onClick={()=>setActive(i)} style={{
+              cursor:"none",textAlign:"left",background: active===i ? "var(--ink)" : "transparent",border:"none",
+              padding:"12px 16px",borderRadius:"3px",transition:"all 0.2s",
+              borderLeft: isMobile ? "none" : `3px solid ${active===i?"var(--ink)":"transparent"}`,
+              borderBottom: isMobile ? `2px solid ${active===i?"var(--ink)":"transparent"}` : "none",
+              flexShrink: 0,
+              minWidth: isMobile ? "140px" : "auto",
+            }}>
+              <div style={{ fontFamily:"var(--sans)",fontSize:"0.88rem",fontWeight:600,color:active===i?"var(--cream)":"var(--ink2)",marginBottom:"2px",whiteSpace: isMobile ? "nowrap" : "normal" }}>{j.co}</div>
+              {!isMobile && <div style={{ fontFamily:"var(--mono)",fontSize:"0.6rem",letterSpacing:"0.08em",color:active===i?"rgba(245,240,232,0.6)":"var(--ink4)" }}>{j.tag} · {j.period.split("–")[0].trim()}</div>}
+            </button>
+          ))}
+        </div>
+
+        {/* Detail */}
+        <div key={active} style={{ animation:"fadeUp 0.35s cubic-bezier(0.22,1,0.36,1) forwards" }}>
+          <div style={{ display:"flex",flexWrap:"wrap",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"20px",gap:"12px" }}>
+            <div>
+              <h3 style={{ fontFamily:"var(--serif)",fontSize: isMobile ? "1.2rem" : "1.5rem",fontWeight:700,color:"var(--ink)",letterSpacing:"-0.02em",marginBottom:"5px" }}>{j.role}</h3>
+              <div style={{ fontFamily:"var(--mono)",fontSize:"0.72rem",color:"var(--accent)",letterSpacing:"0.05em" }}>{j.co} · {j.loc}</div>
             </div>
+            <span style={{ fontFamily:"var(--mono)",fontSize:"0.65rem",color:"var(--ink4)",background:"var(--cream3)",border:"1px solid var(--border2)",padding:"5px 12px",borderRadius:"2px",whiteSpace:"nowrap" }}>{j.period}</span>
           </div>
 
-          {/* Detail */}
-          <div key={active} style={{ animation:"fadeUp 0.35s cubic-bezier(0.22,1,0.36,1) forwards" }}>
-            <div style={{ display:"flex",flexWrap:"wrap",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"20px",gap:"12px" }}>
-              <div>
-                <h3 style={{ fontFamily:"var(--serif)",fontSize:"1.5rem",fontWeight:700,color:"var(--ink)",letterSpacing:"-0.02em",marginBottom:"5px" }}>{j.role}</h3>
-                <div style={{ fontFamily:"var(--mono)",fontSize:"0.72rem",color:"var(--accent)",letterSpacing:"0.05em" }}>{j.co} · {j.loc}</div>
-              </div>
-              <span style={{ fontFamily:"var(--mono)",fontSize:"0.65rem",color:"var(--ink4)",background:"var(--cream3)",border:"1px solid var(--border2)",padding:"5px 12px",borderRadius:"2px",whiteSpace:"nowrap" }}>{j.period}</span>
-            </div>
+          <p style={{ fontFamily:"var(--sans)",fontSize:"0.95rem",fontWeight:300,lineHeight:1.75,color:"var(--ink3)",marginBottom:"24px" }}>{j.desc}</p>
 
-            <p style={{ fontFamily:"var(--sans)",fontSize:"0.95rem",fontWeight:300,lineHeight:1.75,color:"var(--ink3)",marginBottom:"24px" }}>{j.desc}</p>
-
-            <ul style={{ listStyle:"none",display:"flex",flexDirection:"column",gap:"10px" }}>
-              {j.pts.map((p,i)=>(
-                <li key={i} style={{ display:"flex",gap:"12px",alignItems:"flex-start" }}>
-                  <span style={{ fontFamily:"var(--mono)",fontSize:"0.6rem",color:"var(--accent)",marginTop:"5px",flexShrink:0 }}>◆</span>
-                  <span style={{ fontFamily:"var(--sans)",fontSize:"0.9rem",color:"var(--ink2)",lineHeight:1.65 }}>{p}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul style={{ listStyle:"none",display:"flex",flexDirection:"column",gap:"10px" }}>
+            {j.pts.map((p,i)=>(
+              <li key={i} style={{ display:"flex",gap:"12px",alignItems:"flex-start" }}>
+                <span style={{ fontFamily:"var(--mono)",fontSize:"0.6rem",color:"var(--accent)",marginTop:"5px",flexShrink:0 }}>◆</span>
+                <span style={{ fontFamily:"var(--sans)",fontSize:"0.9rem",color:"var(--ink2)",lineHeight:1.65 }}>{p}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

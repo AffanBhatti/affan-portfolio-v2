@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const roles = ["Software Developer", "AI Engineer", "Full-Stack Builder", "CS @ UofT"];
 
@@ -13,6 +14,7 @@ const navLinks = [
 ];
 
 export default function Hero() {
+  const isMobile = useIsMobile();
   const [role, setRole] = useState(0);
   const [typed, setTyped] = useState("");
   const [del, setDel] = useState(false);
@@ -39,23 +41,30 @@ export default function Hero() {
   return (
     <section id="home" style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
-      justifyContent: "flex-end", padding: "140px 48px 80px",
+      justifyContent: "flex-end", padding: isMobile ? "100px 24px 48px" : "140px 48px 80px",
       maxWidth: "1320px", margin: "0 auto",
     }}>
 
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "auto" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "auto", flexWrap: "wrap", gap: "8px" }}>
         <div className="eyebrow">Software Developer · AI Engineer</div>
         <div className="eyebrow" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent3)", display: "inline-block", boxShadow: "0 0 0 2px rgba(42,140,80,0.2)" }}/>
+          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent3)", display: "inline-block" }}/>
           Available for opportunities
         </div>
       </div>
 
-      <div style={{ flex: 1, display: "flex", alignItems: "center", gap: "56px", paddingTop: "60px" }}>
+      {/* On mobile: name stacked, nav below. On desktop: side by side */}
+      <div style={{
+        flex: 1, display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        alignItems: isMobile ? "flex-start" : "center",
+        gap: isMobile ? "32px" : "56px",
+        paddingTop: "40px",
+      }}>
 
         <h1 style={{
           fontFamily: "var(--serif)",
-          fontSize: "clamp(4.5rem, 11vw, 10.5rem)",
+          fontSize: isMobile ? "clamp(3.5rem, 18vw, 5rem)" : "clamp(4.5rem, 11vw, 10.5rem)",
           fontWeight: 900,
           lineHeight: 0.92,
           letterSpacing: "-0.04em",
@@ -64,22 +73,22 @@ export default function Hero() {
         }}>
           Affan
           <br />
-          <span style={{ WebkitTextStroke: "2px var(--ink)", color: "transparent" }}>Bhatti</span>
+          <span style={{ WebkitTextStroke: isMobile ? "1.5px var(--ink)" : "2px var(--ink)", color: "transparent" }}>Bhatti</span>
         </h1>
 
+        {/* Nav grid */}
         <div style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
-          gridTemplateRows: "1fr 1fr",
-          gap: "10px",
-          flex: 1,
-          alignSelf: "center",
+          gap: isMobile ? "8px" : "10px",
+          width: isMobile ? "100%" : undefined,
+          flex: isMobile ? undefined : 1,
         }}>
           {navLinks.map(link => (
             <a key={link.href} href={link.href} style={{
               fontFamily: "var(--mono)",
-              fontSize: "0.82rem",
-              letterSpacing: "0.06em",
+              fontSize: isMobile ? "0.7rem" : "0.82rem",
+              letterSpacing: "0.04em",
               aspectRatio: "2 / 1",
               border: "1px solid var(--border2)",
               borderRadius: "3px",
@@ -89,7 +98,7 @@ export default function Hero() {
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "space-between",
-              padding: "14px 16px",
+              padding: isMobile ? "8px 10px" : "14px 16px",
             }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.background = "var(--ink)";
@@ -102,39 +111,48 @@ export default function Hero() {
                 (e.currentTarget as HTMLElement).style.borderColor = "var(--border2)";
               }}
             >
-              <span style={{ fontFamily: "var(--serif)", fontSize: "1rem", fontWeight: 700, letterSpacing: "-0.01em", color: "inherit" }}>{link.label}</span>
+              <span style={{ fontFamily: "var(--serif)", fontSize: isMobile ? "0.75rem" : "1rem", fontWeight: 700, letterSpacing: "-0.01em", color: "inherit" }}>{link.label}</span>
               <span style={{ opacity: 0.4, fontSize: "0.7rem" }}>↗</span>
             </a>
           ))}
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "40px", alignItems: "end", borderTop: "1px solid var(--border2)", paddingTop: "32px" }}>
+      {/* Bottom info row */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
+        gap: isMobile ? "20px" : "40px",
+        alignItems: "end",
+        borderTop: "1px solid var(--border2)",
+        paddingTop: "24px",
+        marginTop: "40px",
+      }}>
         <div>
-          <div className="eyebrow" style={{ marginBottom: "8px" }}>Currently</div>
-          <div style={{ fontFamily: "var(--mono)", fontSize: "0.85rem", color: "var(--ink2)", minHeight: "1.4rem" }}>
+          <div className="eyebrow" style={{ marginBottom: "6px" }}>Currently</div>
+          <div style={{ fontFamily: "var(--mono)", fontSize: "0.82rem", color: "var(--ink2)", minHeight: "1.2rem" }}>
             {typed}<span>|</span>
           </div>
         </div>
 
-        <div style={{ textAlign: "center" }}>
-          <div className="eyebrow" style={{ marginBottom: "8px" }}>Based in</div>
+        <div style={{ textAlign: isMobile ? "left" : "center" }}>
+          <div className="eyebrow" style={{ marginBottom: "6px" }}>Based in</div>
           <div style={{ fontFamily: "var(--sans)", fontSize: "0.85rem", fontWeight: 500, color: "var(--ink2)" }}>Mississauga, ON</div>
           <div style={{ fontFamily: "var(--mono)", fontSize: "0.7rem", color: "var(--ink4)", marginTop: "3px" }}>University of Toronto</div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "flex-end" }}>
+        <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: "10px", alignItems: isMobile ? "center" : "flex-end" }}>
           <a href="#projects" style={{
-            fontFamily: "var(--mono)", fontSize: "0.72rem", letterSpacing: "0.08em",
-            padding: "12px 24px", background: "var(--ink)", color: "var(--cream)",
+            fontFamily: "var(--mono)", fontSize: "0.7rem", letterSpacing: "0.08em",
+            padding: "10px 20px", background: "var(--ink)", color: "var(--cream)",
             textDecoration: "none", borderRadius: "2px", transition: "background 0.2s", display: "inline-block"
           }}
             onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "var(--accent)")}
             onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "var(--ink)")}
           >View Work →</a>
           <a href="#contact" style={{
-            fontFamily: "var(--mono)", fontSize: "0.72rem", letterSpacing: "0.08em",
-            padding: "12px 24px", border: "1px solid var(--border2)", color: "var(--ink3)",
+            fontFamily: "var(--mono)", fontSize: "0.7rem", letterSpacing: "0.08em",
+            padding: "10px 20px", border: "1px solid var(--border2)", color: "var(--ink3)",
             textDecoration: "none", borderRadius: "2px", transition: "all 0.2s", display: "inline-block"
           }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--ink)"; (e.currentTarget as HTMLElement).style.color = "var(--ink)"; }}
