@@ -1,12 +1,14 @@
 "use client";
-import Image from "next/image";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const focuses = ["Software Development","AI & Machine Learning","Full-Stack Engineering","Multi-Agent Systems","Prompt Engineering","Data Structures & Algorithms","Astrophysics Research","Economics & Strategy","Scientific Computing","Entrepreneurship"];
 
 export default function About() {
+  const isMobile = useIsMobile();
+
   return (
-    <section id="about" style={{ maxWidth:"1320px",margin:"0 auto",padding:"120px 48px" }}>
-      <div style={{ display:"grid",gridTemplateColumns:"1fr 2fr",gap:"80px",alignItems:"start" }}>
+    <section id="about" style={{ maxWidth:"1320px",margin:"0 auto",padding: isMobile ? "80px 24px" : "120px 48px" }}>
+      <div style={{ display:"grid",gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr",gap: isMobile ? "40px" : "80px",alignItems:"start" }}>
 
         <div>
           <div className="num" style={{ marginBottom:"12px" }}>01</div>
@@ -15,9 +17,10 @@ export default function About() {
           </h2>
 
           <div style={{
-            width:"100%",aspectRatio:"3/4",borderRadius:"4px",overflow:"hidden",
+            width:"100%",
+            aspectRatio: isMobile ? "1/1" : "3/4",
+            borderRadius:"4px",overflow:"hidden",
             background:"var(--cream3)",border:"1px solid var(--border2)",
-            maxHeight:"60vw",
           }}>
             <img
               src="/Affan.jpeg"
