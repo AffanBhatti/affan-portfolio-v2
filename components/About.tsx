@@ -8,7 +8,7 @@ export default function About() {
 
   return (
     <section id="about" style={{ maxWidth:"1320px",margin:"0 auto",padding: isMobile ? "80px 24px" : "120px 48px" }}>
-      <div style={{ display:"grid",gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr",gap: isMobile ? "40px" : "80px",alignItems:"start" }}>
+      <div style={{ display:"grid",gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr",gap: isMobile ? "40px" : "80px",alignItems:"center" }}>
 
         <div>
           <div className="num" style={{ marginBottom:"12px" }}>01</div>
@@ -39,7 +39,7 @@ export default function About() {
           </div>
         </div>
 
-        <div style={{ paddingTop: isMobile ? "0" : "72px" }}>
+        <div>
           <p style={{ fontFamily:"var(--sans)",fontSize:"1.15rem",fontWeight:300,lineHeight:1.8,color:"var(--ink2)",marginBottom:"28px",letterSpacing:"-0.01em" }}>
             I&apos;m a Software Developer and AI Engineer pursuing an Honours BSc in <strong style={{ fontWeight:600 }}>Computer Science & Economics</strong> at the University of Toronto, with a research focus in Astronomy.
           </p>

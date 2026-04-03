@@ -53,7 +53,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* On mobile: name stacked, nav below. On desktop: side by side */}
       <div style={{
         flex: 1, display: "flex",
         flexDirection: isMobile ? "column" : "row",
@@ -62,18 +61,18 @@ export default function Hero() {
         paddingTop: "40px",
       }}>
 
+        {/* Big name — black and orange */}
         <h1 style={{
           fontFamily: "var(--serif)",
           fontSize: isMobile ? "clamp(3.5rem, 18vw, 5rem)" : "clamp(4.5rem, 11vw, 10.5rem)",
           fontWeight: 900,
           lineHeight: 0.92,
           letterSpacing: "-0.04em",
-          color: "var(--ink)",
           flexShrink: 0,
         }}>
-          Affan
+          <span style={{ color: "var(--ink)" }}>Affan</span>
           <br />
-          <span style={{ WebkitTextStroke: isMobile ? "1.5px var(--ink)" : "2px var(--ink)", color: "transparent" }}>Bhatti</span>
+          <span style={{ color: "var(--accent)" }}>Bhatti</span>
         </h1>
 
         {/* Nav grid */}
@@ -118,7 +117,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom info row */}
       <div style={{
         display: "grid",
         gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
