@@ -7,7 +7,7 @@
   --cream2: #ede8df;
   --cream3: #e5dfd4;
   --ink: #0e0e0e;
-  --ink2: #2a2a2a;
+  --ink2: #1a1a1a;
   --ink3: #5a5a5a;
   --ink4: #7a7a7a;
   --accent: #c8502a;
@@ -75,10 +75,11 @@ hr.ink { border: none; border-top: 1px solid var(--border2); }
 /* Eyebrow — more visible */
 .eyebrow {
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ink2);
+  color: var(--ink);
+  font-weight: 500;
 }
 
 /* Number */
