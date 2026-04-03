@@ -66,7 +66,7 @@ hr.ink { border: none; border-top: 1px solid var(--border2); }
   padding: 4px 10px;
   border: 1px solid var(--border2);
   border-radius: 2px;
-  color: var(--ink3);
+  color: var(--ink2);
   background: transparent;
   transition: all 0.2s;
 }
@@ -78,7 +78,7 @@ hr.ink { border: none; border-top: 1px solid var(--border2); }
   font-size: 0.65rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ink3);
+  color: var(--ink2);
 }
 
 /* Number */

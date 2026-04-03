@@ -29,13 +29,27 @@ export default function About() {
             />
           </div>
 
-          <div style={{ display:"flex",gap:"12px",marginTop:"16px",flexWrap:"wrap" }}>
-            <a href="mailto:affanbhattizemail@gmail.com" style={{ fontFamily:"var(--mono)",fontSize:"0.62rem",letterSpacing:"0.08em",color:"var(--ink4)",textDecoration:"none",borderBottom:"1px solid var(--border)",paddingBottom:"2px",transition:"color 0.2s" }}
-              onMouseEnter={e=>(e.currentTarget.style.color="var(--ink)")} onMouseLeave={e=>(e.currentTarget.style.color="var(--ink4)")}>Email ↗</a>
-            <a href="https://linkedin.com/in/affan-bhatti-561206311" target="_blank" rel="noopener noreferrer" style={{ fontFamily:"var(--mono)",fontSize:"0.62rem",letterSpacing:"0.08em",color:"var(--ink4)",textDecoration:"none",borderBottom:"1px solid var(--border)",paddingBottom:"2px",transition:"color 0.2s" }}
-              onMouseEnter={e=>(e.currentTarget.style.color="var(--ink)")} onMouseLeave={e=>(e.currentTarget.style.color="var(--ink4)")}>LinkedIn ↗</a>
-            <a href="/Affan_Bhatti_Resume.pdf" target="_blank" style={{ fontFamily:"var(--mono)",fontSize:"0.62rem",letterSpacing:"0.08em",color:"var(--ink4)",textDecoration:"none",borderBottom:"1px solid var(--border)",paddingBottom:"2px",transition:"color 0.2s" }}
-              onMouseEnter={e=>(e.currentTarget.style.color="var(--ink)")} onMouseLeave={e=>(e.currentTarget.style.color="var(--ink4)")}>Résumé ↗</a>
+          {/* Social links — bigger and more button-like */}
+          <div style={{ display:"flex",gap:"8px",marginTop:"16px",flexWrap:"wrap" }}>
+            {[
+              { label:"Email", href:"mailto:affanbhattizemail@gmail.com" },
+              { label:"LinkedIn", href:"https://linkedin.com/in/affan-bhatti-561206311" },
+              { label:"Résumé", href:"/Affan_Bhatti_Resume.pdf" },
+            ].map(l=>(
+              <a key={l.label} href={l.href} target={l.href.startsWith("http") || l.href.endsWith(".pdf") ? "_blank" : undefined} rel="noopener noreferrer"
+                style={{
+                  fontFamily:"var(--mono)",fontSize:"0.72rem",letterSpacing:"0.06em",
+                  color:"var(--ink2)",textDecoration:"none",
+                  border:"1px solid var(--border2)",
+                  borderRadius:"3px",
+                  padding:"8px 14px",
+                  transition:"all 0.2s",
+                  fontWeight:500,
+                }}
+                onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.background="var(--ink)"; (e.currentTarget as HTMLElement).style.color="var(--cream)"; (e.currentTarget as HTMLElement).style.borderColor="var(--ink)"; }}
+                onMouseLeave={e=>{ (e.currentTarget as HTMLElement).style.background="transparent"; (e.currentTarget as HTMLElement).style.color="var(--ink2)"; (e.currentTarget as HTMLElement).style.borderColor="var(--border2)"; }}
+              >{l.label} ↗</a>
+            ))}
           </div>
         </div>
 
