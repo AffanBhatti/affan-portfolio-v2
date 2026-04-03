@@ -46,8 +46,8 @@ export default function Hero() {
     }}>
 
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "auto", flexWrap: "wrap", gap: "8px" }}>
-        <div className="eyebrow">Software Developer · AI Engineer</div>
-        <div className="eyebrow" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div style={{ fontFamily:"var(--mono)",fontSize:"0.72rem",letterSpacing:"0.15em",textTransform:"uppercase",color:"var(--ink)",fontWeight:700 }}>Software Developer · AI Engineer</div>
+        <div style={{ fontFamily:"var(--mono)",fontSize:"0.72rem",letterSpacing:"0.15em",textTransform:"uppercase",color:"var(--ink)",fontWeight:700,display:"flex",alignItems:"center",gap:"8px" }}>
           <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent3)", display: "inline-block" }}/>
           Available for opportunities
         </div>
